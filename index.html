@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Age Calculator</title>
+</head>
+<body>
+    <h1>Age Calculator</h1>
+    <form id="ageForm">
+        <div class ="date_box">
+            <label for="dobDay" style="font-size: 25px; font-weight: bold;"> Day:</label>
+            <input type="number" id="dobDay" class="date-dropdown" name="dobDay" min="1" max="31" required>
+            <br>
+            <label for="dobMonth" style="font-size: 25px; font-weight: bold;">Month:</label>
+            <input type="number" id="dobMonth" class="date-dropdown" name="dobMonth" min="1" max="12" required>
+            <br>
+            <label for="dobYear" style="font-size: 25px; font-weight: bold;">Year:</label>
+            <input type="number" id="dobYear" class="date-dropdown" name="dobYear" min="1900" max="2100" required>
+            <br><br>
+    
+        </div>
+        <button type="submit">Calculate Age</button>
+        <br><br><br>
+    </form>
+    <h2 id="result"></h2>
+    <br><br>
+
+    <script>
+        document.getElementById('ageForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const day = parseInt(document.getElementById('dobDay').value, 10);
+            const month = parseInt(document.getElementById('dobMonth').value, 10);
+            const year = parseInt(document.getElementById('dobYear').value, 10);
+
+            const dob = new Date(year, month - 1, day);
+            const now = new Date();
+
+            let age = now.getFullYear() - dob.getFullYear();
+            const monthDifference = now.getMonth() - dob.getMonth();
+            const dayDifference = now.getDate() - dob.getDate();
+
+            if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
+                age--;
+            }
+
+            document.getElementById('result').textContent = Your age is: ${age} years old.;
+        });
+    </script>
+</body>
+</html>
